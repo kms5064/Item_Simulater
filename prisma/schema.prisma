@@ -18,6 +18,8 @@ model Users {
   email    String @map("email")
   password String @map("password")
 
+  character Character[]
+
   @@map("Users")
 }
 
@@ -27,6 +29,7 @@ model Items {
   item_health Int    @map("item_health")
   item_power  Int    @map("item_power")
   item_price  Int    @map("item_price")
+
 
   @@map("Items")
 }
@@ -38,6 +41,8 @@ model Character {
   char_health Int    @map("char_health")
   char_power  Int    @map("char_power")
   char_money  Int    @map("char_money")
+
+  user Users @relation(fields: [userId], references: [userId], onDelete: Cascade)
 
   @@map("Character")
 }

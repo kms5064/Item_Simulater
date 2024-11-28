@@ -13,7 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Users {
   userId   Int    @id @default(autoincrement()) @map("userId")
   email    String @map("email")
@@ -25,12 +24,10 @@ model Users {
 }
 
 model Items {
-  item_code   Int    @id @unique @default(autoincrement()) @map("itemId")
-  item_name   String @map("item_name")
-  item_health Int    @map("item_health")
-  item_power  Int    @map("item_power")
-  item_price  Int    @map("item_price")
-
+  item_code  Int    @id @default(autoincrement()) @map("itemId")
+  item_name  String @map("item_name")
+  item_stat  Json   @map("item_stat")
+  item_price Int    @map("item_price")
 
   @@map("Items")
 }

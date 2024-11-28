@@ -1,0 +1,21 @@
+{
+  "name": "Item_Simulater",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kms5064/Item_Simulater.git",
+  "author": "kimminsung <kms5064@naver.com>",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^5.22.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "prettier": "^3.4.1"
+  }
+}

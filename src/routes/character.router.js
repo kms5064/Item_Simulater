@@ -39,12 +39,13 @@ router.delete('/delete', authMiddleware, async (req, res, next) => {
 
     const del = await prisma.character.findFirst({
         where: {
-            char_name
+            char_name,
+            userId
         },
     });
 
     if (!del) {
-        return res.status(404).json({ message: '존재하지 않는 캐릭터명입니다.' });
+        return res.status(404).json({ message: '존재하지 않거나, 삭제할 권한이 없는 캐릭터명입니다.' });
       }
 
       await prisma.character.delete({
@@ -55,5 +56,41 @@ router.delete('/delete', authMiddleware, async (req, res, next) => {
 
     return res.status(201).json({ message: '캐릭터가 삭제되었습니다.'});
 });
+//캐릭터 상세 조회
+router.get('/check/:char_name', authMiddleware, async (req, res, next) => {
+    const {userId} = req.user;
+    const { char_name } = req.params;
+    const check = await prisma.character.findFirst({
+      where: {
+        char_name
+      },
+      select: {
+        char_name: true, 
+        char_health: true, 
+        char_power: true, 
+      }
+    });
+    const check2 = await prisma.character.findFirst({
+        where: {
+            char_name,
+            userId
+        },
+        select: {
+          char_name: true, 
+          char_health: true, 
+          char_power: true, 
+          char_money: true
+        }
+    })
+    if(!check) {
+        return res.status(404).json({ message: '존재하지 않는 캐릭터명입니다.'});
+    }
+  if(check2) 
+    {
+    return res.status(200).json({ data: check2 })
+    } else if(check) {
+        return res.status(200).json({ data: check })
+    }
+  });
 
 export default router;
